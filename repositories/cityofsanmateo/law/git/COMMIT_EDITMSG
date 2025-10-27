@@ -1,0 +1,20 @@
+Sign targets and metadata
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Mon Oct 27 01:26:22 2025 +0100
+#
+# interactive rebase in progress; onto e283cea
+# Last commands done (4 commands done):
+#    pick 903b1b7 Sign targets and metadata
+#    reword b517084 Add cityofsanmateo/law-xml repository
+# No commands remaining.
+# You are currently editing a commit while rebasing branch 'master' on 'e283cea'.
+#
+# Changes to be committed:
+#	modified:   metadata/snapshot.json
+#	modified:   metadata/targets.json
+#	modified:   metadata/timestamp.json
+#	modified:   targets/cityofsanmateo/law-xml
+#

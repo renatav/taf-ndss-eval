@@ -3,6 +3,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from scripts.shared import copy_dir, delete_dir, ensure_exists, rewire_remote
+from taf.git.repository import GitRepository
 
 REPO_ROOT = "../repositories"
 

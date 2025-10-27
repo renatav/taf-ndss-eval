@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<document xmlns:citations="https://open.law/schemas/citations" xmlns="https://open.law/schemas/library" xmlns:cache="https://open.law/schemas/cache" xmlns:macro="https://open.law/schemas/macro" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:codified="https://open.law/schemas/codified" xmlns:codify="https://open.law/schemas/codify" xmlns:xi="http://www.w3.org/2001/XInclude" id="City of San Mateo, Cal., Ord. No. 2024-04">
+  <num>2024-4</num>
+  <heading>ORDINANCE 2024-04</heading>
+  <meta>
+    <effective>2024-10-11</effective>
+    <citations>
+      <citation type="ord" url="./adopted/2024-04.pdf">Ord. No. 2024-04</citation>
+      <citation type="bb">City of San Mateo, Cal., Ord. No. 2024-04</citation>
+    </citations>
+    <history>
+      <introduced>2024-08-23</introduced>
+      <adopted>2024-08-23</adopted>
+    </history>
+  </meta>
+  <recitals>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Some codition from ordinance 2024-4</text>
+    </recital>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Another condition from ordinance 2024-4</text>
+    </recital>
+    <recital>
+      <conjunction>NOW, THEREFORE,</conjunction>
+      <text>THE CITY COUNCIL OF THE CITY OF SAN MATEO, CALIFORNIA, ORDAINS that:</text>
+    </recital>
+  </recitals>
+  <section>
+    <num>1</num>
+    <heading>SECTION 1 OF ORDINANCE 2024-4</heading>
+    <text>Text from section 1 of ordinance 2024-4.</text>
+  </section>
+  <section>
+    <num>2</num>
+    <heading>SECTION 2 OF ORDINANCE 2024-4</heading>
+    <text>Text from section 2 of ordinance 2024-4.</text>
+  </section>
+  <section>
+    <num>3</num>
+    <codify:remove doc="City of San Mateo, Cal., Ord. No. 2024-03" path="§2|(b)"/>
+  </section>
+</document>

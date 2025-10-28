@@ -2,13 +2,13 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import find_namespace, run
+from scripts.shared import find_namespace, run as run1
 
-REPO_ROOT = "../repositories"
+REPO_ROOT = "../workspaces/scenario1"
 USER_DIR = os.path.join(REPO_ROOT, "user")
 
 
-def main():
+def run():
     print("Running user scenario logic...")
 
     # Find namespace folder inside user/
@@ -20,9 +20,7 @@ def main():
     user_repo_path = os.path.join(USER_DIR, namespace)
 
     # Run updater
-    run(["taf", "repo", "update"], cwd=user_repo_path)
+    run1(["taf", "repo", "update"], cwd=user_repo_path)
 
     print("User scenario complete.")
 
-if __name__ == "__main__":
-    main()

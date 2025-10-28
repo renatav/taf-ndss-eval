@@ -3,6 +3,8 @@ import time
 import sys
 import os
 
+from scripts.scenario_setup import setup_scenario
+
 SCRIPT_DIR = os.path.dirname(__file__)
 SCRIPTS = [
     ("../scenario_setup.py", 0),
@@ -22,9 +24,11 @@ def run_script(path, delay_seconds):
         time.sleep(delay_seconds)
 
 def main():
-    for script_path, pause in SCRIPTS:
-        run_script(script_path, pause)
-    print("\n=== Scenario completed ===")
+    print("Running scenario 1")
+    setup_scenario(1)
+    # for script_path, pause in SCRIPTS:
+    #     run_script(script_path, pause)
+    # print("\n=== Scenario completed ===")
 
 if __name__ == "__main__":
     main()

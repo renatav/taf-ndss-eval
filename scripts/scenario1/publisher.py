@@ -4,11 +4,11 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from scripts.shared import find_namespace, run
 
-REPO_ROOT = "../repositories"
+REPO_ROOT = "../workspaces/scenario1"
 USER_DIR = os.path.join(REPO_ROOT, "user")
 
 
-def main():
+def run():
     print("Running user scenario logic...")
 
     # Find namespace folder inside user/
@@ -24,5 +24,3 @@ def main():
 
     print("User scenario complete.")
 
-if __name__ == "__main__":
-    main()

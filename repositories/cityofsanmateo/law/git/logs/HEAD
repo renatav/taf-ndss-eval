@@ -40,3 +40,10 @@ dc318524c6a37d000cbde0eb9ce98435e4ef0a4f 549935f8551a04a5914d426ff0a3cd2b4fa32a2
 794d45904d93816be802274403a1932fb9ce1b2e c367d3916c2d19edd21db65d4efba9d2d82861c6 Renata <rvaderna@openlawlib.org> 1761524974 +0100	rebase (reword): Add cityofsanmateo/law-xml repository
 c367d3916c2d19edd21db65d4efba9d2d82861c6 04583b08103900de2bb1288e790e79dc1bdd4880 Renata <rvaderna@openlawlib.org> 1761524974 +0100	rebase (reword): Sign targets and metadata
 04583b08103900de2bb1288e790e79dc1bdd4880 04583b08103900de2bb1288e790e79dc1bdd4880 Renata <rvaderna@openlawlib.org> 1761524974 +0100	rebase (finish): returning to refs/heads/master
+04583b08103900de2bb1288e790e79dc1bdd4880 1d778565b227499a7ec28056a35868b399e0bf13 Renata <rvaderna@openlawlib.org> 1761615526 +0100	commit: Sign targets and metadata
+1d778565b227499a7ec28056a35868b399e0bf13 04583b08103900de2bb1288e790e79dc1bdd4880 Renata <rvaderna@openlawlib.org> 1761616428 +0100	reset: moving to HEAD~1
+04583b08103900de2bb1288e790e79dc1bdd4880 082cf2fec6820c8e4811310d96db256448745c9e Renata <rvaderna@openlawlib.org> 1761617216 +0100	commit: Sign targets and metadata
+082cf2fec6820c8e4811310d96db256448745c9e 04583b08103900de2bb1288e790e79dc1bdd4880 Renata <rvaderna@openlawlib.org> 1761617693 +0100	reset: moving to HEAD~1
+04583b08103900de2bb1288e790e79dc1bdd4880 9a16de86e6bd98672f6be66d3950eda8e58195d7 Renata <rvaderna@openlawlib.org> 1761617748 +0100	commit: Sign targets and metadata
+9a16de86e6bd98672f6be66d3950eda8e58195d7 04583b08103900de2bb1288e790e79dc1bdd4880 Renata <rvaderna@openlawlib.org> 1761618078 +0100	reset: moving to HEAD~1
+04583b08103900de2bb1288e790e79dc1bdd4880 52e67ca5c00d74f05f74a5c0ed651dc1ac8c2d2c Renata <rvaderna@openlawlib.org> 1761618099 +0100	commit: Sign targets and metadata

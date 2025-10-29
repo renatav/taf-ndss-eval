@@ -123,17 +123,16 @@ def update_commit_in_target_file(target_file_path, new_commit_hash):
     print("Metadata modified.")
 
 
-def update_target_repo(target_repo_path):
-    if not os.path.exists(target_repo_path):
-        raise FileNotFoundError(f"ERROR: Repo path does not exist: {target_repo_path}")
-
+def update_target_repo(target_repo):
+    """
+    Update a file in the target repository and commit, simulating an attackers
+    attemps at a malicious update
+    """
     # Simulate malicious commit
-    readme_path = os.path.join(target_repo_path, "README.md")
-    with open(readme_path, "a") as f:
-        f.write("malicious1\n")
-
-    commit_and_push(target_repo_path, "bad stuff", set_upstream=True)
-    commit = get_head_commit(target_repo_path)
+    readme_path = target_repo.path / "README.md"
+    readme_path.write_text("malicious\n")
+    commit = target_repo.commit("malicious update")
+    target_repo.push()
     return commit
 
 

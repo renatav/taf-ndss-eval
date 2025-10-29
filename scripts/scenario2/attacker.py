@@ -18,6 +18,7 @@ def main():
 
     auth_repo_path = os.path.join(ATTACKER_DIR, namespace, "law")
     target_file_path = os.path.join(auth_repo_path, "targets", namespace, REPO_NAME)
+
     commit = update_target_repo(target_repo_path)
     update_commit_in_target_file(target_file_path, commit)
 

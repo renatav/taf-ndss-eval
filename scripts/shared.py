@@ -5,6 +5,8 @@ import shutil
 import subprocess
 import sys
 from taf.tuf.repository import MetadataRepository
+from taf.updater.updater import update_repository, UpdateConfig
+from taf.updater.types.update import OperationType
 
 
 def run(cmd, cwd=None, capture=False):
@@ -96,6 +98,21 @@ def rewire_remote(repo_path, origin_repo_path):
 
     # Add new local remote
     subprocess.run(["git", "remote", "add", "origin", origin_repo_path], cwd=repo_path, check=True)
+
+
+def run_updater(auth_repo, no_upstream=True):
+    config = UpdateConfig(
+        operation=OperationType.UPDATE,
+        path=auth_repo.path,
+        update_from_filesystem=True,
+        no_upstream=no_upstream
+    )
+    try:
+        update_repository(config)
+    except Exception as e:
+        pass
+
+
 
 def get_head_commit(repo_path):
     """Get the HEAD commit hash of a Git repo"""

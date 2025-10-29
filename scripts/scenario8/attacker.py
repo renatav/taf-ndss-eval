@@ -13,12 +13,8 @@ REPO_NAME = "law-xml"
 
 def run():
     print("=== Running attacker scenario===")
-
-    print()
-    print("The attacker has compromised the target repository's credentials, allowing them to commit and push.")
-    print("They cannot modify the authentication repository.")
-    print("They now alter law-xml and push a malicious update.")
-    print()
+    print("An attacker has gained access to a target repository and can commit and push, but cannot update the authentication repository")
+    print("They make a modification to law-xml and push that change")
 
     namespace = find_namespace(ATTACKER_DIR)
     repo_path = Path(ATTACKER_DIR, namespace, REPO_NAME)
@@ -26,4 +22,4 @@ def run():
 
     update_target_repo(target_repo)
 
-    print("=== Attacker scenario complete ===\n")
+    print("=== Malicious push complete ===")

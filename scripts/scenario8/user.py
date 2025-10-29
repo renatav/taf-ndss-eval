@@ -11,11 +11,7 @@ USER_DIR = os.path.join(REPO_ROOT, "user")
 
 
 def run():
-    print("=== Running user scenario ===\n")
-    print("The user runs the updater with default settings.")
-    print("No new commits are fetched, since the authentication repository has not been updated.")
-    print("The user is informed that there are no new updates available.")
-    print()
+    print("Running user scenario logic...")
 
     namespace = find_namespace(USER_DIR)
     user_repo_path = Path(USER_DIR, namespace, "law")
@@ -23,5 +19,5 @@ def run():
 
     run_updater(user_repo)
 
-    print("=== User scenario complete ===\n")
+    print("User scenario complete.")
 

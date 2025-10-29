@@ -11,11 +11,7 @@ PUBLISHER_DIR = os.path.join(REPO_ROOT, "publisher")
 
 
 def run():
-    print("=== Running publisher scenario===\n")
-    print("The publisher runs the updater with a flag that checks for all updates.")
-    print("Even though the authentication repository was not updated, the malicious target commit is detected.")
-    print("The publisher is informed that a validation issue has occurred.")
-    print()
+    print("Running publisher scenario logic...")
 
     namespace = find_namespace(PUBLISHER_DIR)
     publisher_repo_path = Path(PUBLISHER_DIR, namespace, "law")
@@ -23,5 +19,5 @@ def run():
 
     run_updater(publisher_repo, no_upstream=False)
 
-    print("=== Publisher scenario complete ===\n")
+    print("Publisher scenario complete.")
 

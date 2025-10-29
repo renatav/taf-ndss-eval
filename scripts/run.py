@@ -34,15 +34,20 @@ def main():
     except ModuleNotFoundError as e:
         pass
 
-    print("Running attacker script")
+    print("\n=== Running attacker scenario===\n")
     attacker.run()
+    print("\n=== Attacker scenario complete ===\n")
     input("Press ENTER to continue")
-    print("Running user script")
+
+    print("\n=== Running user scenario ===\n")
     user.run()
+    print("\n=== User scenario complete ===\n")
     input("Press ENTER to continue")
+
     if publisher is not None:
-        print("Running publisher script")
+        print("=== Running publisher scenario===\n")
         publisher.run()
+        print("\n=== Publisher scenario complete ===\n")
         input("Press ENTER to continue")
 
 

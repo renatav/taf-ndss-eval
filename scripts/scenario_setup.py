@@ -4,7 +4,7 @@ import sys
 from typing import List, Optional
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from scripts.shared import copy_dir, delete_dir, ensure_exists, rewire_remote
+from scripts.shared import copy_dir, delete_dir
 from taf.git import GitRepository
 from taf.updater.updater import clone_repository, UpdateConfig
 from taf.updater.types.update import OperationType
@@ -16,7 +16,7 @@ NAMESPACE = f"cityofsanmateo"
 
 
 def setup_scenario(scenario_num: int, actors: Optional[List]=None):
-    print("=== Starting scenario ===")
+    print("\n=== Starting scenario ===\n")
 
     if actors is None:
         actos = ["user", "attacker", "publisher"]
@@ -56,6 +56,6 @@ def setup_scenario(scenario_num: int, actors: Optional[List]=None):
 
         clone_repository(config)
 
-    print("=== Scenario setup complete ===")
+    print("\n=== Scenario setup complete ===\n")
 
 

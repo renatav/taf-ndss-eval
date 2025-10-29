@@ -1,51 +1,22 @@
-import hashlib
 import json
 import os
+from pathlib import Path
 import shutil
 import subprocess
 import sys
 from taf.tuf.repository import MetadataRepository
 from taf.updater.updater import update_repository, UpdateConfig
 from taf.updater.types.update import OperationType
-
-
-def run(cmd, cwd=None, capture=False):
-    print(f"$ {' '.join(cmd)} (in {cwd or os.getcwd()})")
-
-    if capture:
-        result = subprocess.run(
-            cmd,
-            cwd=cwd,
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            check=True
-        )
-    else:
-        result = subprocess.run(cmd, cwd=cwd, check=True)
-    if result.returncode != 0:
-        print(f"ERROR: command failed with exit code {result.returncode}")
-        sys.exit(result.returncode)
-    if capture:
-        return result.stdout.strip()
-
+from taf.utils import run
 
 def commit(repo_path, commit_msg):
     run(["git", "add", "-A"], cwd=repo_path)
     run(["git", "commit", "-m", commit_msg], cwd=repo_path, capture=True)
 
 
-def commit_and_push(repo_path, commit_msg, set_upstream=False, bypass_hook=False):
-    run(["git", "add", "-A"], cwd=repo_path)
-
-    commit = run(["git", "commit", "-m", commit_msg], cwd=repo_path, capture=True)
-    if set_upstream:
-        push_with_upstream(repo_path, bypass_hook=bypass_hook)
-    else:
-        if bypass_hook:
-            run(["git", "push", "--no-verify"], cwd=repo_path)
-        else:
-            run(["git", "push"], cwd=repo_path)
+def push_no_verify(repo):
+    run("git push --no-verify", cwd=repo.path)
+    print(f"Repo {repo.name}: Successfully pushed to remote")
 
 
 def find_namespace(dir_path):
@@ -86,32 +57,19 @@ def delete_dir(path):
         print(f"Removing {path}...")
         shutil.rmtree(path)
 
-def rewire_remote(repo_path, origin_repo_path):
-    """Replace the 'origin' remote with a local path"""
-    git_path = os.path.join(repo_path, ".git")
-    if not os.path.exists(git_path):
-        return
-    print(f"Rewiring remote in {repo_path} to local origin at {origin_repo_path}")
-
-    # Remove old remote
-    subprocess.run(["git", "remote", "remove", "origin"], cwd=repo_path, check=True)
-
-    # Add new local remote
-    subprocess.run(["git", "remote", "add", "origin", origin_repo_path], cwd=repo_path, check=True)
-
 
 def run_updater(auth_repo, no_upstream=True):
     config = UpdateConfig(
         operation=OperationType.UPDATE,
         path=auth_repo.path,
         update_from_filesystem=True,
-        no_upstream=no_upstream
+        no_upstream=no_upstream,
+        strict=True,
     )
     try:
         update_repository(config)
     except Exception as e:
         pass
-
 
 
 def get_head_commit(repo_path):
@@ -122,21 +80,13 @@ def get_head_commit(repo_path):
     )
     return result.stdout.strip()
 
-def update_commit_in_target_file(target_file_path, new_commit_hash):
+
+def update_commit_in_target_file(target_file_path: Path, new_commit_hash):
     """Overwrite the 'commit' key in the metadata JSON file"""
     print(f"Modifying metadata at {target_file_path} with commit {new_commit_hash}")
-
-    with open(target_file_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    if "commit" not in data:
-        print("WARNING: No 'commit' key found, adding it.")
-
-    data["commit"] = new_commit_hash
-
-    with open(target_file_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
-
+    data = json.loads(target_file_path.read_text())
+    data["commit"] = str(new_commit_hash)
+    target_file_path.write_text(json.dumps(data))
     print("Metadata modified.")
 
 

@@ -1,5 +1,7 @@
 {
     "repositories": {
-        "cityofsanmateo/law-xml": {}
+        "cityofsanmateo/law-xml": {},
+        "cityofsanmateo/law-xml-codified": {},
+        "cityofsanmateo/law-html": {}
     }
 }

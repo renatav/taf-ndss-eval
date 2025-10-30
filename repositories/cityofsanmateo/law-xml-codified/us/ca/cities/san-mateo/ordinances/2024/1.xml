@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<document xmlns:citations="https://open.law/schemas/citations" xmlns="https://open.law/schemas/library" xmlns:cache="https://open.law/schemas/cache" xmlns:macro="https://open.law/schemas/macro" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:codified="https://open.law/schemas/codified" xmlns:codify="https://open.law/schemas/codify" xmlns:xi="http://www.w3.org/2001/XInclude" id="City of San Mateo, Cal., Ord. No. 2024-01">
+  <num>2024-1</num>
+  <heading>ORDINANCE 2024-01</heading>
+  <meta>
+    <effective>2024-01-19</effective>
+    <citations>
+      <citation type="ord" url="./adopted/2024-01.pdf">Ord. No. 2024-01</citation>
+      <citation type="bb">City of San Mateo, Cal., Ord. No. 2024-01</citation>
+    </citations>
+    <history>
+      <introduced>2024-01-02</introduced>
+      <adopted>2024-01-02</adopted>
+    </history>
+  </meta>
+  <recitals>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Some codition from ordinance 2024-1</text>
+    </recital>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Another condition from ordinance 2024-1</text>
+    </recital>
+    <recital>
+      <conjunction>NOW, THEREFORE,</conjunction>
+      <text>THE CITY COUNCIL OF THE CITY OF SAN MATEO, CALIFORNIA, ORDAINS that:</text>
+    </recital>
+  </recitals>
+  <section>
+    <num>1</num>
+    <heading>SECTION 1 OF ORDINANCE 2024-1</heading>
+    <text>Modified text from section 1 of ordinance 2024-1.</text>
+    <annotation app="2024-02-15" doc="City of San Mateo, Cal., Ord. No. 2024-02" eff="2024-02-15" path="§3" type="History"/>
+  </section>
+  <section>
+    <num>2</num>
+    <heading>SECTION 2 OF ORDINANCE 2024-1</heading>
+    <text>Text from section 2 of ordinance 2024-1.</text>
+  </section>
+  <section>
+    <codify:insert doc="City of San Mateo, Cal., Code" codified:doc="City of San Mateo, Cal., Code" codified:path="1.01.080"/>
+    <num>1.01.080</num>
+    <heading>AN INSERTED SECTION</heading>
+    <para>
+      <num>(a)</num>
+      <text>This is this from para a of section 1.01.080</text>
+    </para>
+    <para>
+      <num>(b)</num>
+      <text>This is this from para a of section 1.01.080</text>
+    </para>
+  </section>
+</document>

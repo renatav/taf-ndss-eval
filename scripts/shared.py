@@ -99,6 +99,7 @@ def update_target_repo(target_repo):
     readme_path = target_repo.path / "README.md"
     readme_path.write_text("malicious\n")
     commit = target_repo.commit("malicious update")
+    print(f"Modifying {readme_path} and committing.")
     target_repo.push()
     return commit
 

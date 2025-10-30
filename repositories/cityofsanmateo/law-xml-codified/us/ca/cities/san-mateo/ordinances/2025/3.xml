@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<document xmlns:citations="https://open.law/schemas/citations" xmlns="https://open.law/schemas/library" xmlns:cache="https://open.law/schemas/cache" xmlns:macro="https://open.law/schemas/macro" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:codified="https://open.law/schemas/codified" xmlns:codify="https://open.law/schemas/codify" xmlns:xi="http://www.w3.org/2001/XInclude" id="City of San Mateo, Cal., Ord. No. 2025-03">
+  <num>2025-03</num>
+  <heading>ORDINANCE 2025-03</heading>
+  <meta>
+    <effective>2025-07-07</effective>
+    <citations>
+      <citation type="ord" url="./adopted/2025-03.pdf">Ord. No. 2025-03</citation>
+      <citation type="bb">City of San Mateo, Cal., Ord. No. 2025-03</citation>
+    </citations>
+    <history>
+      <introduced>2025-06-01</introduced>
+      <adopted>2025-06-01</adopted>
+    </history>
+  </meta>
+  <recitals>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Some codition from ordinance 2025-2</text>
+    </recital>
+    <recital>
+      <conjunction>WHEREAS,</conjunction>
+      <text>Another condition from ordinance 2025-2</text>
+    </recital>
+    <recital>
+      <conjunction>NOW, THEREFORE,</conjunction>
+      <text>THE CITY COUNCIL OF THE CITY OF SAN MATEO, CALIFORNIA, ORDAINS that:</text>
+    </recital>
+  </recitals>
+  <section>
+    <num>1</num>
+    <heading>SECTION 1 OF ORDINANCE 2025-2</heading>
+    <text>Text from section 1 of ordinance 2025-2.</text>
+  </section>
+  <section codify:expire="2025-10-10">
+    <num>2</num>
+    <heading>SECTION 2 OF ORDINANCE 2025-2</heading>
+    <text>Text from section 2 of ordinance 2025-2.</text>
+  </section>
+  <section>
+    <num>4</num>
+    <codify:insert doc="City of San Mateo, Cal., Ord. No. 2025-01" codified:path="2"/>
+    <para>
+      <num>(a)</num>
+      <heading>AN INSERTED PARA</heading>
+      <text>This is text from isnerted para 4|(a)</text>
+    </para>
+  </section>
+  <section>
+    <num>5</num>
+    <codify:find-replace doc="City of San Mateo, Cal., Ord. No. 2025-01" codified:path="1" find="Text" replace="Some modified text"/>
+  </section>
+</document>

@@ -31,4 +31,4 @@ def run():
 
     update_commit_in_target_file(target_file_path, target_commit)
     auth_repo.commit("Update target commit without signing")
-    push_no_verify(auth_repo)
+    auth_repo.push(no_verify=True)

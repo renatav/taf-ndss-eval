@@ -118,7 +118,7 @@ def update_target_metadata(repo_path, target_name):
 
     meta = compute_hashes_and_length(repo_path, os.path.join(repo_path, "targets", target_name))
 
-    targets_json_path = os.path.join(repo_path, "metadata", "law.json")
+    targets_json_path = os.path.join(repo_path, "metadata", "targets.json")
     with open(targets_json_path, "r", encoding="utf-8") as f:
         metadata = json.load(f)
 

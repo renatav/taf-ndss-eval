@@ -1,50 +1,39 @@
 import os
+from pathlib import Path
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-from scripts.shared import commit_and_push, find_namespace, run
+from scripts.shared import find_namespace, run
+from taf.auth_repo import AuthenticationRepository
+from taf.utils import run as run_cmd
 
+REPO_ROOT = "../workspaces/scenario5"
+ATTACKER_DIR = Path(REPO_ROOT, "attacker")
 
-REPO_ROOT = "../repositories"
-ATTACKER_DIR = os.path.join(REPO_ROOT, "attacker")
-
-def find_old_commit(repo_path):
-    # Find an old commit that touched the snapshot.json file
-    cmd = ["git", "log", "--pretty=format:%H", "--", f"metadata/assets.json"]
-    commits = run(cmd, cwd=repo_path, capture=True).splitlines()
-    if not commits:
-        raise Exception("No matching commits found.")
-    return commits[1]
 
 def create_rollback_commit(repo_path, commit_hash):
-    # Checkout latest
 
-    # Get list of all files changed in the old commit
-    changed_files = run(
-        ["git", "diff-tree", "--no-commit-id", "--name-only", "-r", commit_hash],
+    changed_files = run_cmd(
+        f"git diff-tree --no-commit-id --name-only -r {commit_hash}",
         cwd=repo_path,
-        capture=True
     ).splitlines()
-
 
     print("Reapplying files from old commit:")
     for f in changed_files:
         print(" -", f)
-        run(["git", "checkout", commit_hash, "--", f], cwd=repo_path)
+        run_cmd(f"git checkout {commit_hash} -- {f}", cwd=repo_path)
 
 
-def main():
-    print("Running attacker scenario logic...")
+def run():
+    print("The attacker has obtained credentials that grant commit and push access to the authentication repository.")
+    print("They have not compromised any metadata signing keys.")
+    print("They reapply metadata from a previous commit in an attempt to make users accept an older repository state as current.\n")
 
     namespace = find_namespace(ATTACKER_DIR)
-
-    auth_repo_path = os.path.join(ATTACKER_DIR, namespace, "law")
-    commit = find_old_commit(auth_repo_path)
-    create_rollback_commit(auth_repo_path, commit)
-    commit_and_push(auth_repo_path, "Reapplying old snapshot metadata", set_upstream=True, bypass_hook=True)
-
-    print("=== Malicious push complete ===")
-
-if __name__ == "__main__":
-    main()
+    auth_repo_path = Path(ATTACKER_DIR, namespace, "law")
+    auth_repo = AuthenticationRepository(path=auth_repo_path)
+    old_commit = auth_repo.commit_before_commit(auth_repo.head_commit())
+    create_rollback_commit(auth_repo_path, old_commit.hash)
+    auth_repo.commit("Reapplying old metadata")
+    auth_repo.push(no_verify=True)

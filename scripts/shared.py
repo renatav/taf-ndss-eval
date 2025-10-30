@@ -9,15 +9,6 @@ from taf.updater.updater import update_repository, UpdateConfig
 from taf.updater.types.update import OperationType
 from taf.utils import run
 
-def commit(repo_path, commit_msg):
-    run(["git", "add", "-A"], cwd=repo_path)
-    run(["git", "commit", "-m", commit_msg], cwd=repo_path, capture=True)
-
-
-def push_no_verify(repo):
-    run("git push --no-verify", cwd=repo.path)
-    print(f"Repo {repo.name}: Successfully pushed to remote")
-
 
 def find_namespace(dir_path):
     for entry in os.listdir(dir_path):
@@ -27,21 +18,6 @@ def find_namespace(dir_path):
     print("ERROR: No namespace directory found in attacker/")
     sys.exit(1)
 
-
-def get_current_branch(repo_path):
-    return run(
-        ["git", "rev-parse", "--abbrev-ref", "HEAD"],
-        cwd=repo_path,
-        capture=True
-    )
-
-def push_with_upstream(repo_path, bypass_hook=False):
-    branch = get_current_branch(repo_path)
-    print(f"Pushing branch '{branch}' with upstream set")
-    cmd = ["git", "push", "--set-upstream", "origin", branch]
-    if bypass_hook:
-        cmd.append("--no-verify")
-    run(cmd, cwd=repo_path)
 
 def ensure_exists(path, label):
     if not os.path.exists(path):
@@ -71,14 +47,6 @@ def run_updater(auth_repo, no_upstream=True):
     except Exception as e:
         pass
 
-
-def get_head_commit(repo_path):
-    """Get the HEAD commit hash of a Git repo"""
-    result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=repo_path, text=True, capture_output=True, check=True
-    )
-    return result.stdout.strip()
 
 
 def update_commit_in_target_file(target_file_path: Path, new_commit_hash):

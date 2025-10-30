@@ -8,10 +8,11 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../.
 from scripts.shared import find_namespace
 from taf.git import GitRepository
 from taf.models.types import Commitish
+from taf.auth_repo import AuthenticationRepository
+
 
 REPO_ROOT = "../workspaces/scenario4"
 ATTACKER_DIR = Path(REPO_ROOT, "attacker")
-REPO_NAME = "law-xml"
 
 def reset_repos_to_target_commits(auth_repo_path, namespace):
     targets_dir = Path(auth_repo_path, "targets", namespace)
@@ -33,10 +34,14 @@ def reset_repos_to_target_commits(auth_repo_path, namespace):
 
 
 def run():
+    print("The attacker has obtained credentials that grant commit and push access to both the target and authentication repositories.")
+    print("They have not compromised any metadata signing keys.")
+    print("They revert all repositories to a previous commit and force-push the branches, attempting to make users believe an older version is the current one.\n")
 
     namespace = find_namespace(ATTACKER_DIR)
-
-    auth_repo_path = os.path.join(ATTACKER_DIR, namespace, "law")
-    # force_remove_last_n_commits(auth_repo_path, 20)
+    auth_repo_path = Path(ATTACKER_DIR, namespace, "law")
+    auth_repo = AuthenticationRepository(path=auth_repo_path)
+    auth_repo.reset_num_of_commits(2, hard=True)
     reset_repos_to_target_commits(auth_repo_path, namespace)
+    auth_repo.push(force=True, no_verify=True)
 

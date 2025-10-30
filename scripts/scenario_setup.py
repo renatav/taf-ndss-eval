@@ -13,6 +13,7 @@ REPO_ROOT = Path("../repositories")
 ORIGIN_DIR = REPO_ROOT / "origin"
 WORKSPACES_DIR = Path("../workspaces")
 NAMESPACE = f"cityofsanmateo"
+repos = (f"{NAMESPACE}/law", f"{NAMESPACE}/law-xml", f"{NAMESPACE}/law-xml-codified", f"{NAMESPACE}/law-html")
 
 
 def setup_scenario(scenario_num: int, actors: Optional[List]=None):
@@ -22,7 +23,7 @@ def setup_scenario(scenario_num: int, actors: Optional[List]=None):
         actos = ["user", "attacker", "publisher"]
 
     # initialize origin
-    for repo_name in (f"{NAMESPACE}/law", f"{NAMESPACE}/law-xml"):
+    for repo_name in repos:
         repo_path = REPO_ROOT / repo_name
         git_dir = repo_path / "git"
         if git_dir.is_dir():
@@ -57,5 +58,3 @@ def setup_scenario(scenario_num: int, actors: Optional[List]=None):
         clone_repository(config)
 
     print("\n=== Scenario setup complete ===\n")
-
-

@@ -8,13 +8,13 @@ from taf.git import GitRepository
 
 REPO_ROOT = "../workspaces/scenario1"
 ATTACKER_DIR = Path(REPO_ROOT, "attacker")
-REPO_NAME = "law-xml"
+REPO_NAME = "law-html"
 
 
 def run():
-    print("The attacker has obtained credentials that allow commit and push access to the target repository.")
+    print("The attacker has obtained credentials that allow commit and push access to a target repository.")
     print("They cannot modify the authentication repository.")
-    print("They now alter law-xml and push a malicious update.\n")
+    print("They now alter law-html and push a malicious update.\n")
 
     namespace = find_namespace(ATTACKER_DIR)
     repo_path = Path(ATTACKER_DIR, namespace, REPO_NAME)

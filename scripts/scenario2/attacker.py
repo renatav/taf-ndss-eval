@@ -9,13 +9,13 @@ from scripts.shared import push_no_verify, find_namespace, update_commit_in_targ
 
 REPO_ROOT = "../workspaces/scenario2"
 ATTACKER_DIR = Path(REPO_ROOT, "attacker")
-REPO_NAME = "law-xml"
+REPO_NAME = "law-html"
 
 
 def run():
-    print("The attacker has obtained credentials that grant commit and push access to both the target and authentication repositories.")
+    print("The attacker has obtained credentials that grant commit and push access to both a target and the authentication repository.")
     print("They have not compromised any metadata signing keys.")
-    print("They alter law-xml and push a malicious update.\n")
+    print("They alter law-html and push a malicious update.\n")
     print("The attacker then manually updates the file storing last valid commit for that target repository in the authentication repository and pushes the change.")
     print("They do not update and sign TUF metadata.\n")
 

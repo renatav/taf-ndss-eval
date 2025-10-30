@@ -11,7 +11,7 @@ USER_DIR = Path(REPO_ROOT, "user")
 
 
 def run():
-    print("The user runs the updater with default settings.")
+    print("The user/publisher runs the updater with default settings.")
     print("The updater detects that the authentication repository has been updated and fetches the incoming changes for validation.")
     print("Validation fails because the metadata updates were not signed.")
     print("The user's local repository remains unchanged.\n")

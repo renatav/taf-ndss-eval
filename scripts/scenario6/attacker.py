@@ -13,8 +13,7 @@ REPO_NAME = "law-html"
 
 
 def run():
-    print("An attacker pushes a malicious but invalid update, like the one in Scenario 2.\n")
-
+    print("The attacker pushes a malicious but invalid update, like the one in Scenario 2.\n")
 
     namespace = find_namespace(ATTACKER_DIR)
     target_repo_path = Path(ATTACKER_DIR, namespace, REPO_NAME)

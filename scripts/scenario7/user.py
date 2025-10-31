@@ -1,27 +1,21 @@
 import os
+from pathlib import Path
 import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import commit, find_namespace, run, update_target_repo
+from scripts.shared import find_namespace, run_updater
+from taf.auth_repo import AuthenticationRepository
 
-REPO_ROOT = "../repositories"
-USER_DIR = os.path.join(REPO_ROOT, "user")
-REPO_NAME = "law-html"
+REPO_ROOT = "../workspaces/scenario7"
+USER_DIR = Path(REPO_ROOT, "user")
 
-def main():
-    print("Running user scenario logic...")
+
+def run():
+    print("The user runs the updater with default settings.")
+    print("The update fails because the root metadata was signed with only one key, while the signing threshold is two.\n")
 
     namespace = find_namespace(USER_DIR)
-    user_repo_path = os.path.join(USER_DIR, namespace, "law")
+    user_repo_path = Path(USER_DIR, namespace, "law")
+    user_repo = AuthenticationRepository(path=user_repo_path)
 
-    readme_path = os.path.join(user_repo_path, "README.md")
-    with open(readme_path, "a") as f:
-        f.write("accidental\n")
-
-    # Run updater
-    run(["taf", "repo", "update", "--force", "-v"], cwd=user_repo_path)
-
-    print("User scenario complete.")
-
-if __name__ == "__main__":
-    main()
+    run_updater(user_repo)

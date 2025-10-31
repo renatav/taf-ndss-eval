@@ -39,16 +39,16 @@ def main():
     print("\n=== Attacker scenario complete ===\n")
     input("Press ENTER to continue")
 
-    print("\n=== Running user scenario ===\n")
-    user.run()
-    print("\n=== User scenario complete ===\n")
-    input("Press ENTER to continue")
-
     if publisher is not None:
         print("\n=== Running publisher scenario ===\n")
         publisher.run()
         print("\n=== Publisher scenario complete ===\n")
         input("Press ENTER to continue")
+
+    print("\n=== Running user scenario ===\n")
+    user.run()
+    print("\n=== User scenario complete ===\n")
+    input("Press ENTER to continue")
 
 
 

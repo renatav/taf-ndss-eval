@@ -1,39 +1,31 @@
 import os
+from pathlib import Path
 import sys
+from taf.git import GitRepository
+from taf.auth_repo import AuthenticationRepository
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+from scripts.shared import find_namespace, update_commit_in_target_file, update_target_repo
 
-from scripts.shared import commit_and_push, find_namespace, run
-
-
-REPO_ROOT = "../repositories"
-ATTACKER_DIR = os.path.join(REPO_ROOT, "attacker")
-
-def find_old_commit(repo_path):
-    # Find an old commit that touched the snapshot.json file
-    cmd = ["git", "log", "--pretty=format:%H", "--", f"metadata/law.json"]
-    commits = run(cmd, cwd=repo_path, capture=True).splitlines()
-    if not commits:
-        raise Exception("No matching commits found.")
-    return commits[1]
-
-def create_rollback_commit(repo_path, commit_hash):
-    # Checkout latest
-    # Checkout the old file into working directory
-    run(["git", "checkout", commit_hash, "--", "metadata/law.json"], cwd=repo_path)
+REPO_ROOT = "../workspaces/scenario6"
+ATTACKER_DIR = Path(REPO_ROOT, "attacker")
+REPO_NAME = "law-html"
 
 
-def main():
-    print("Running attacker scenario logic...")
+def run():
+    print("An attacker pushes a malicious but invalid update, like the one in Scenario 2.\n")
+
 
     namespace = find_namespace(ATTACKER_DIR)
+    target_repo_path = Path(ATTACKER_DIR, namespace, REPO_NAME)
+    auth_repo_path = Path(ATTACKER_DIR, namespace, "law")
+    target_repo = GitRepository(path=target_repo_path)
+    print()
+    target_commit = update_target_repo(target_repo)
+    auth_repo = AuthenticationRepository(path=auth_repo_path)
 
-    auth_repo_path = os.path.join(ATTACKER_DIR, namespace, "law")
-    commit = find_old_commit(auth_repo_path)
-    create_rollback_commit(auth_repo_path, commit)
-    commit_and_push(auth_repo_path, "Reapplying old law metadata", set_upstream=True, bypass_hook=True)
+    target_file_path = auth_repo_path / "targets" / namespace / REPO_NAME
 
-    print("=== Malicious push complete ===")
-
-if __name__ == "__main__":
-    main()
+    update_commit_in_target_file(target_file_path, target_commit)
+    auth_repo.commit("Update target commit without signing")
+    auth_repo.push(no_verify=True)

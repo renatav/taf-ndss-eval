@@ -7,7 +7,7 @@ from taf.git import GitRepository
 from taf.auth_repo import AuthenticationRepository
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import push_no_verify, find_namespace, update_commit_in_target_file, update_target_metadata, update_target_repo
+from scripts.shared import find_namespace, update_commit_in_target_file, update_target_metadata, update_target_repo
 
 REPO_ROOT = "../workspaces/scenario3"
 ATTACKER_DIR = Path(REPO_ROOT, "attacker")

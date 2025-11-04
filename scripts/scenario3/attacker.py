@@ -7,11 +7,10 @@ from taf.git import GitRepository
 from taf.auth_repo import AuthenticationRepository
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import find_namespace, update_commit_in_target_file, update_target_metadata, update_target_repo
+from scripts.shared import update_commit_in_target_file, update_target_metadata, update_target_repo
 
-REPO_ROOT = "../workspaces/scenario3"
-ATTACKER_DIR = Path(REPO_ROOT, "attacker")
-REPO_NAME = "law-xml"
+REPO_NAME = "cityofsanmateo/law-html"
+AUTH_REPO_NAME = "cityofsanmateo/law"
 
 
 def update_snapshot_metadata(auth_repo_path, file_versions):
@@ -58,7 +57,7 @@ def update_timestamp_metadata(auth_repo_path, snapshot_version):
     print("Timestamp metadata updated (unsigned).")
 
 
-def run():
+def run(lib_path):
     print("The attacker has obtained credentials that grant commit and push access to both the target and authentication repositories.")
     print("They have not compromised any metadata signing keys.")
     print("They modify law-xml and push a malicious update.\n")
@@ -66,18 +65,17 @@ def run():
     print("They update the TUF metadata correctly (the attacker is familiar with TUF), but they cannot produce valid signatures of the metadata files")
     print("They push the changes\n")
 
-    namespace = find_namespace(ATTACKER_DIR)
-    target_repo_path = Path(ATTACKER_DIR, namespace, REPO_NAME)
-    auth_repo_path = Path(ATTACKER_DIR, namespace, "law")
+    target_repo_path = Path(lib_path, "attacker", REPO_NAME)
     target_repo = GitRepository(path=target_repo_path)
+    auth_repo_path = Path(lib_path, "attacker", AUTH_REPO_NAME)
     print()
     target_commit = update_target_repo(target_repo)
     auth_repo = AuthenticationRepository(path=auth_repo_path)
 
-    target_file_path = auth_repo_path / "targets" / namespace / REPO_NAME
+    target_file_path = auth_repo_path / "targets" / REPO_NAME
 
     update_commit_in_target_file(target_file_path, target_commit)
-    version = update_target_metadata(auth_repo_path, f"{namespace}/{REPO_NAME}")
+    version = update_target_metadata(auth_repo_path, REPO_NAME)
     version = update_snapshot_metadata(auth_repo_path, {"targets.json": version})
     update_timestamp_metadata(auth_repo_path, version)
     auth_repo.commit("Update target commit and metadata without signing")

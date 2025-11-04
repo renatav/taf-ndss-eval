@@ -4,19 +4,17 @@ import sys
 from taf.auth_repo import AuthenticationRepository
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import find_namespace
 from taf.api.metadata import update_metadata_expiration_date
 
-REPO_ROOT = "../workspaces/scenario6"
-PUBLISHER_DIR = Path(REPO_ROOT, "publisher")
+
+AUTH_REPO_NAME = "cityofsanmateo/law"
 
 
-def run():
+def run(lib_path):
     print("The publisher recklessly pulls changes without using TAF for validation.")
     print("They then create and push a new valid, signed update.")
 
-    namespace = find_namespace(PUBLISHER_DIR)
-    auth_repo_path = Path(PUBLISHER_DIR, namespace, "law")
+    auth_repo_path = Path(lib_path, "publisher", AUTH_REPO_NAME)
     auth_repo = AuthenticationRepository(path=auth_repo_path)
     auth_repo.pull()
 

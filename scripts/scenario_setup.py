@@ -16,11 +16,14 @@ NAMESPACE = f"cityofsanmateo"
 repos = (f"{NAMESPACE}/law", f"{NAMESPACE}/law-xml", f"{NAMESPACE}/law-xml-codified", f"{NAMESPACE}/law-html")
 
 
-def setup_scenario(scenario_num: int, actors: Optional[List]=None):
+def setup_scenario(origin_path: Path, workspace_path, actors: Optional[List]=None):
     print("\n=== Starting scenario ===\n")
 
     if actors is None:
         actos = ["user", "attacker", "publisher"]
+
+    origin_path.mkdir(parents=True)
+    workspace_path.mkdir(parents=True)
 
     # initialize origin
     for repo_name in repos:
@@ -30,31 +33,23 @@ def setup_scenario(scenario_num: int, actors: Optional[List]=None):
             new_dir = git_dir.with_name(".git")
             git_dir.rename(new_dir)
 
-        origin_repo_path = ORIGIN_DIR / repo_name
+        origin_repo_path = origin_path / repo_name
         origin_repo = GitRepository(path=origin_repo_path)
-        if origin_repo_path.is_dir():
-            delete_dir(origin_repo_path)
         origin_repo.clone_from_disk(repo_path, is_bare=True)
 
 
-    scenario_dir = WORKSPACES_DIR / f"scenario{scenario_num}"
-    if not scenario_dir.is_dir():
-        scenario_dir.mkdir(parents=True)
+        for actor in actos:
+            actor_dir = workspace_path / actor / repo_name
+            actor_repo = GitRepository(path=actor_dir)
+            actor_repo.clone_from_disk(origin_repo_path, keep_remote=True)
 
-    for actor in actos:
-        actor_dir = scenario_dir / actor
-        # clean if already exists
-        if actor_dir.is_dir():
-            delete_dir(actor_dir)
-            actor_dir.mkdir()
+        # config = UpdateConfig(
+        #     library_dir = workspace_path,
+        #     remote_url=str((origin_path / f"{NAMESPACE}/law").resolve().absolute()),
+        #     path=str(actor_dir / f"{NAMESPACE}/law"),
+        #     update_from_filesystem=True,
+        # )
 
-        config = UpdateConfig(
-            operation=OperationType.CLONE,
-            remote_url=str((ORIGIN_DIR / f"{NAMESPACE}/law").resolve().absolute()),
-            path=str(actor_dir / f"{NAMESPACE}/law"),
-            update_from_filesystem=True,
-        )
-
-        clone_repository(config)
+        # clone_repository(config)
 
     print("\n=== Scenario setup complete ===\n")

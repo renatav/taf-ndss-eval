@@ -2,7 +2,7 @@ import json
 import os
 from pathlib import Path
 import shutil
-import subprocess
+import stat
 import sys
 from taf.tuf.repository import MetadataRepository
 from taf.updater.updater import update_repository, UpdateConfig
@@ -30,7 +30,7 @@ def copy_dir(src, dest):
 
 
 def delete_dir(path):
-    if os.path.exists(path):
+    if path.is_dir():
         print(f"Removing {path}...")
         shutil.rmtree(path, onerror=on_rm_error)
 
@@ -40,16 +40,12 @@ def on_rm_error(_func, path, _exc_info):
     are deleted.
     """
     try:
-        os.chmod(path, os.stat.S_IWRITE)
+        os.chmod(path, stat.S_IWRITE)
     except OSError as e:
         return
     try:
         os.unlink(path)
     except (OSError, PermissionError) as e:
-        print(
-            "Permission error",
-            e,
-        )
         pass
 
 

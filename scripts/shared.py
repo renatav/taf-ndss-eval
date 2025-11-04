@@ -28,10 +28,29 @@ def copy_dir(src, dest):
     print(f"Restoring {dest} from {src}...")
     shutil.copytree(src, dest)
 
+
 def delete_dir(path):
     if os.path.exists(path):
         print(f"Removing {path}...")
-        shutil.rmtree(path)
+        shutil.rmtree(path, onerror=on_rm_error)
+
+
+def on_rm_error(_func, path, _exc_info):
+    """Used by when calling rmtree to ensure that readonly files and folders
+    are deleted.
+    """
+    try:
+        os.chmod(path, os.stat.S_IWRITE)
+    except OSError as e:
+        return
+    try:
+        os.unlink(path)
+    except (OSError, PermissionError) as e:
+        print(
+            "Permission error",
+            e,
+        )
+        pass
 
 
 def run_updater(auth_repo, no_upstream=True):

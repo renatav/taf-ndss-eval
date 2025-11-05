@@ -4,23 +4,21 @@ import sys
 from taf.auth_repo import AuthenticationRepository
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from scripts.shared import find_namespace
 from taf.api.roles import _load_pub_key_from_file
 from taf.keys import _load_signer_from_keystore
 
-REPO_ROOT = "../workspaces/scenario7"
-ATTACKER_DIR = Path(REPO_ROOT, "attacker")
-REPO_NAME = "law-html"
+
+REPO_NAME = "cityofsanmateo/law-html"
+AUTH_REPO_NAME = "cityofsanmateo/law"
 KEYSTORE_PATH = Path("../keystore")
 
 
-def run():
+def run(lib_path):
     print("The attacker has obtained credentials that grant commit and push access to the authentication repository.")
     print("They have also compromised the snapshot and timestamp keys (these roles have a signing threshold of 1) and one root key.")
     print("They add their own targets signing key, and use the compromised keys to sign root, snapshot, and timestamp metadata.")
 
-    namespace = find_namespace(ATTACKER_DIR)
-    auth_repo_path = Path(ATTACKER_DIR, namespace, "law")
+    auth_repo_path = Path(lib_path, "attacker", AUTH_REPO_NAME)
     auth_repo = AuthenticationRepository(path=auth_repo_path)
 
     pub_key_path = Path(KEYSTORE_PATH, "targets_attacker.pub")

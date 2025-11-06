@@ -212,7 +212,7 @@ def main():
         else:
             print(f"{prof_file}: {expected}")
 
-    print("\n=== Running Actual Tests ===")
+    print("\n=== Running Tests ===")
 
     actual_times = run_updater()
 

@@ -4,7 +4,9 @@ This section evaluates TAF’s repository validation performance across multiple
 
 In practice, TAF’s updater is used to securely clone and update repositories, as well as to validate local repositories when needed. Since cloning speed depends on network conditions and is not a reliable benchmark, this evaluation focuses on validating local repositories, which does not require network access.
 
-The test setup begins by cloning the repositories without running validation. Validation is then executed and profiled using Python’s `cProfile`, with analysis performed by custom scripts that extract cumulative runtime for the core updater routine (`run_tuf_updater`). These measurements provide a direct indication of TAF’s internal efficiency during validation.
+The test setup begins by cloning the repositories without running validation. After cloning, the repositories are reset to the exact  states used during our original evaluation. This ensures consistency, as the source repositories are active production repositories and may change over time.
+
+ Validation is then executed and profiled using Python’s `cProfile`, with analysis performed by custom scripts that extract cumulative runtime for the core updater routine (`run_tuf_updater`). These measurements provide a direct indication of TAF’s internal efficiency during validation.
 
 Performance naturally varies based on hardware (e.g., CPU, disk speed), so the results should be viewed as indicative baselines, not fixed benchmarks. Additionally, due to implementation differences in the `pygit2` library, TAF exhibits different runtime characteristics on Windows and Unix-based systems. It is also well known that Git operations are slower on Windows. To ensure reproducibility, we provide both `*-windows.prof` and `*-unix.prof` baseline profiles so users can compare their local results against the appropriate reference.ofiles. Users may compare their local results against the corresponding reference for their operating system. Is it known that git is slower on Windows.
 

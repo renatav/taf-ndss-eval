@@ -5,6 +5,7 @@ import sys
 import os
 from taf.git import GitRepository
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 def run(cmd, cwd=None):
     print(f"$ {' '.join(cmd)}")
@@ -28,7 +29,7 @@ def read_previous_commit_count(file_path):
         return 0
 
 
-def main():
+def clone_repos():
     orgs = ["cityofsanmateo", "mohicanlaw", "sanipueblo", "tmchippewa"]
     repos = [
         "law",
@@ -78,5 +79,3 @@ def main():
             except Exception as e:
                 print(f"Failed to clone {org}/{repo}: {e}")
 
-if __name__ == "__main__":
-    main()

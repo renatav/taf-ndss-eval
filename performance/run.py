@@ -5,7 +5,7 @@ import sys
 import time
 import os
 import traceback
-
+from clone_repos import clone_repos
 
 def run(cmd, cwd=None):
     print(f"$ {' '.join(cmd)}")
@@ -190,7 +190,7 @@ def main():
 
     print("=== Set up: Cloning Repositories ===")
 
-    run(["python", "clone_repos.py"])
+    clone_repos()
 
     prof_files = [
         f"mohicanlaw-{ext}.prof",

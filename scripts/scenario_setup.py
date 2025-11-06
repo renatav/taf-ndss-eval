@@ -4,10 +4,8 @@ import sys
 from typing import List, Optional
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from scripts.shared import copy_dir, delete_dir
 from taf.git import GitRepository
-from taf.updater.updater import clone_repository, UpdateConfig
-from taf.updater.types.update import OperationType
+
 
 REPO_ROOT = Path("../repositories")
 ORIGIN_DIR = REPO_ROOT / "origin"

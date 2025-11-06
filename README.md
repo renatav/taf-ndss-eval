@@ -26,4 +26,7 @@ The security evaluation scripts invoke `git commit`, so these settings are requi
 
 Detailed instructions for running and inspecting the security evaluation scenarios can be found in [scripts/README.md](scripts/README.md).
 
+## Running the Performance Tests
+
+Detailed instructions for running performance tests can be found in [performance/README.md](performance/README.md).
 

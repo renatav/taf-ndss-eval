@@ -78,6 +78,5 @@ def main():
             except Exception as e:
                 print(f"Failed to clone {org}/{repo}: {e}")
 
-    import pdb; pdb.set_trace()
 if __name__ == "__main__":
     main()

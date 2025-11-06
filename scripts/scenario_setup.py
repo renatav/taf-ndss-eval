@@ -27,7 +27,8 @@ def setup_scenario(origin_path: Path, workspace_path, actors: Optional[List]=Non
     for repo_name in repos:
         repo_path = REPO_ROOT / repo_name
         git_dir = repo_path / "git"
-        if git_dir.is_dir():
+        dot_git_dir = repo_path / ".git"
+        if git_dir.is_dir() and not dot_git_dir.is_dir():
             new_dir = git_dir.with_name(".git")
             git_dir.rename(new_dir)
 

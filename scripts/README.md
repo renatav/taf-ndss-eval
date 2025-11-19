@@ -11,7 +11,7 @@ python run.py --scenario <number>
 To see an overview of the scenarios, run:
 
 ```
-python run.py list
+python run.py --list
 ```
 
 Each scenario automatically sets up fresh repositories and simulates attacker, user, and, if relevant, publisher actions.

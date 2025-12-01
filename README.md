@@ -1,6 +1,9 @@
 # TAF Artifact Evaluation
 
-This artifact includes two categories of evaluation scripts:
+This repository contains the artifact evaluation materials for the NDSS 2026
+submitted paper "Enhancing Legal Document Security and Accessibility with TAF".
+
+The artifact includes two categories of evaluation scripts:
 
 - **Security evaluation scenarios** that demonstrate how TAF prevents a range of attacks, especially those involving attacker control over a publisher’s Git account or key material.
 - **Performance assessment scripts** that benchmark profiling results that assess TAF's performance under realistic workloads.
@@ -22,14 +25,15 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com
 ```
 
-Additionally, you must configure a to install the 
-
-The security evaluation scripts invoke `git commit`, so these settings are required.
+The security evaluation scripts invoke `git commit`, so these settings are
+required.
 
 ## Running the Security Scenarios
 
-Detailed instructions for running and inspecting the security evaluation scenarios can be found in [scripts/README.md](scripts/README.md).
+Detailed instructions for running and inspecting the security evaluation
+scenarios can be found in [scripts/README.md](scripts/README.md).
 
 ## Running the Performance Tests
 
-Detailed instructions for running performance tests can be found in [performance/README.md](performance/README.md).
+Detailed instructions for running performance tests can be found in
+[performance/README.md](performance/README.md).

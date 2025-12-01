@@ -8,6 +8,10 @@ The artifact includes two categories of evaluation scripts:
 - **Security evaluation scenarios** that demonstrate how TAF prevents a range of attacks, especially those involving attacker control over a publisher’s Git account or key material.
 - **Performance assessment scripts** that benchmark profiling results that assess TAF's performance under realistic workloads.
 
+The evaluation uses the pre-built TAF hosted on PyPI, but you may download the
+source code for TAF `v0.36.0` at
+https://github.com/openlawlibrary/taf/releases/tag/v0.36.0.
+
 ## Requirements
 
 To run the included scripts:

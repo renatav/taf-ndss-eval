@@ -1,5 +1,6 @@
 import pstats
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -96,7 +97,7 @@ def run_updater():
                 git_path = os.path.join(path, "git")
                 dotgit_path = os.path.join(path, ".git")
                 if os.path.exists(git_path):
-                    os.rename(git_path, dotgit_path)
+                    shutil.move(git_path, dotgit_path)
                     renamed_paths.append((dotgit_path, git_path))
 
             if not os.path.isdir(law_dir):
@@ -148,7 +149,7 @@ def run_updater():
             for dotgit_path, git_path in renamed_paths:
                 if os.path.exists(dotgit_path):
                     try:
-                        os.rename(dotgit_path, git_path)
+                        shutil.move(dotgit_path, git_path)
                         # print(f"  Restored {dotgit_path} to {git_path}")
                     except Exception as e:
                         print(f"  Failed to restore {dotgit_path}: {e}")

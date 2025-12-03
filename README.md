@@ -14,6 +14,27 @@ https://github.com/openlawlibrary/taf/releases/tag/v0.36.0.
 
 ## Requirements
 
+You may set up the evaluation environment by using the supplied Dockerfile, or
+by manually installing the required dependencies.
+
+### Option A, Dockerfile
+
+A Dockerfile is supplied for easy evaluation of TAF. Note that the performance
+tests may run slower than with a manual install due to Docker adding overhead.
+
+To build and run the Docker container for the evaluation of TAF, run the
+following commands:
+
+```bash
+docker build -t taf-ndss-eval .
+docker run -it taf-ndss-eval
+```
+
+You do not need to perform any further dependency management or setup a virtual
+environment when in the Docker container.
+
+### Option B, Manual Installation
+
 To run the included scripts:
 
 1. **Python version**: Supported versions are **Python 3.8 through 3.12**.

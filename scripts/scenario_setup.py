@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 import sys
 from typing import List, Optional
@@ -30,7 +31,7 @@ def setup_scenario(origin_path: Path, workspace_path, actors: Optional[List]=Non
         dot_git_dir = repo_path / ".git"
         if git_dir.is_dir() and not dot_git_dir.is_dir():
             new_dir = git_dir.with_name(".git")
-            git_dir.rename(new_dir)
+            shutil.move(git_dir, new_dir)
 
         origin_repo_path = origin_path / repo_name
         origin_repo = GitRepository(path=origin_repo_path)

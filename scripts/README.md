@@ -14,6 +14,32 @@ To see an overview of the scenarios, run:
 python run.py --list
 ```
 
+For reference, if the installation of TAF was successful, running Scenario 1 should print the following output:
+
+```
+$ python run.py --scenario 1
+
+=== Starting scenario ===
+
+
+=== Scenario setup complete ===
+
+
+=== Running attacker scenario ===
+
+The attacker has obtained credentials that allow commit and push access to a target repository.
+They cannot modify the authentication repository.
+They now alter law-html and push a malicious update.
+
+Modifying /home/renata/papers/taf-ndss-eval/workspaces/scenario1_scenario_20251203_202025/attacker/cityofsanmateo/law-html/README.md and committing.
+
+Repo cityofsanmateo/law-html: Successfully pushed to remote
+
+=== Attacker scenario complete ===
+
+Press ENTER to continue
+```
+
 Each scenario automatically sets up fresh repositories and simulates attacker, user, and, if relevant, publisher actions.
 **User** refers to any person or entity with an interest in having local copies of legal repositories. They are not responsible for updating them or acting in case of compromises.
 **Publisher** is an actor with those responsibilities.
@@ -120,3 +146,24 @@ They add their own targets signing key and use the compromised root key to sign 
 
 When the user runs the updater with default settings, validation fails because the root metadata is signed with only one key.
 This prevents the partially compromised root from being accepted and blocks the malicious update.
+
+## Repository Descriptions and Scenario Verification
+
+TAF repositories include an authentication repository, typically titled the `law`
+repository, and a number of target repositories, such as `law-html`, `law-xml`, and
+`law-xml-codified`. For the purposes of this evaluation, we created a set of
+repositories containing a small subset of one of the partner's ordinances. These
+repositories are under `repositories/cityofsanmateo`. It is not possible to explore
+them immediately after cloning, as their `.git` directories were renamed to `git` in
+order to commit them to this parent Git repository. Scenario execution logic
+automatically renames them and uses them to set up origin repositories.
+
+After running a script, the attacker's scenario will be executed first, simulating
+malicious pushes. To verify that an attacker successfully pushed to the upstream
+repository, examine the history of repositories in the `origin` directory upon seeing
+the message that the attacker scenario was completed successfully. You will see
+commit messages such as `"malicious update"`. Once done, press ENTER to proceed to
+the next actor. Once that actor's scenario is completed (publisher's or user's),
+examine the repositories in `scenario/<actor>` directory. Verify that the malicious
+update that was pushed to upstream was not pulled. You can also see the error message
+raised by TAF's updater to understand what was detected as incorrect.

@@ -19,6 +19,19 @@ Performance naturally varies based on hardware (e.g., CPU, disk speed), so the r
    python -m run.py
    ```
 
+For reference, if the installation of TAF was successful, running the script should print the following output:
+
+```
+$ python run.py
+=== Set up: Cloning Repositories ===
+$ git clone https://github.com/cityofsanmateo/law.git cityofsanmateo/law
+Cloning into 'cityofsanmateo/law'...
+remote: Enumerating objects: 50055, done.
+remote: Counting objects: 100% (6205/6205), done.
+remote: Compressing objects: 100% (1120/1120), done.
+....
+```
+
 3. The script will:
 
    - Execute taf repo validate under profiling for several sample partner repositories.
